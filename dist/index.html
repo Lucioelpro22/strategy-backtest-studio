@@ -7,6 +7,7 @@
   <title>Strategy Backtest Studio</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="professional.css" />
+  <link rel="stylesheet" href="backtest.css" />
 </head>
 <body>
   <header class="topbar">
@@ -40,7 +41,7 @@
         <span class="status" id="validationStatus"><i></i> Estrategia válida</span>
       </div>
 
-      <div class="tabs"><button class="active">Constructor</button><button id="codeTab">Código Python</button><span>Autoguardado activo</span></div>
+      <div class="tabs"><button class="active">Constructor</button><button id="codeTab">Código Python</button><button id="backtestTab">Backtest</button><span>Autoguardado activo</span></div>
 
       <div id="canvas" class="canvas">
         <div class="phase entry-phase"><div class="phase-label"><b>01</b><span>ENTRADA</span></div><div class="rule-list" id="entryRules"></div><button class="add-condition" data-side="entry">＋ Agregar condición de entrada</button></div>
@@ -49,6 +50,23 @@
       </div>
 
       <div id="codePanel" class="code-panel hidden"><div class="code-toolbar"><span>strategy.py</span><button id="copyCode">Copiar código</button></div><pre><code id="codePreview"></code></pre></div>
+
+      <div id="backtestPanel" class="backtest-panel hidden">
+        <div class="backtest-toolbar">
+          <div><span class="eyebrow">MOTOR DE SIMULACIÓN</span><h2>Resultados del backtest</h2><p>Probá la estrategia con datos demo o cargá un CSV con columnas date, open, high, low, close y volume.</p></div>
+          <div class="dataset-actions"><label class="file-btn">Cargar CSV<input id="csvInput" type="file" accept=".csv,text/csv" /></label><button class="btn ghost" id="demoData">Usar datos demo</button><button class="btn primary" id="runBacktest">▶ Ejecutar</button></div>
+        </div>
+        <div class="dataset-status"><span><i id="dataDot"></i><b id="datasetName">Sin dataset</b></span><span id="datasetRows">0 velas</span><span id="datasetRange">—</span></div>
+        <div class="metric-grid">
+          <article><span>Retorno neto</span><strong id="metricReturn">—</strong><small id="metricPnl">Ejecutá una simulación</small></article>
+          <article><span>Máx. drawdown</span><strong id="metricDrawdown">—</strong><small>Sobre curva de capital</small></article>
+          <article><span>Win rate</span><strong id="metricWinrate">—</strong><small id="metricTrades">0 operaciones</small></article>
+          <article><span>Profit factor</span><strong id="metricPF">—</strong><small>Ganancias / pérdidas</small></article>
+        </div>
+        <div class="chart-card"><div class="chart-head"><div><b>Curva de capital</b><span id="chartLegend">Capital inicial</span></div><span class="live-badge">SIMULACIÓN LOCAL</span></div><canvas id="equityChart" width="1000" height="280"></canvas></div>
+        <div class="trades-card"><div class="chart-head"><div><b>Operaciones</b><span>Entradas y salidas simuladas</span></div><button id="downloadTrades" disabled>Descargar CSV</button></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Entrada</th><th>Salida</th><th>Precio entrada</th><th>Precio salida</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody id="tradesBody"><tr><td colspan="7" class="empty-row">Ejecutá un backtest para ver las operaciones.</td></tr></tbody></table></div></div>
+        <p class="simulation-note">Los resultados son una simulación educativa, no garantizan rendimientos futuros y no incluyen slippage.</p>
+      </div>
     </section>
 
     <aside class="inspector">
@@ -69,6 +87,7 @@
   </main>
   <div id="toast" class="toast">Código copiado</div>
   <script src="app.js"></script>
+  <script src="backtest.js"></script>
 </body>
 </html>
 
