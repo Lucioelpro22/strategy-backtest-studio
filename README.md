@@ -17,6 +17,10 @@ Constructor visual de estrategias de trading que genera código Python compatibl
 - Exportación de la configuración en JSON.
 - Autoguardado local en el navegador.
 - Código generado con manejo de órdenes y analizadores de Backtrader.
+- Motor de backtesting en el navegador, sin enviar datos a servidores.
+- Importación de CSV OHLCV y dataset demo incluido.
+- Curva de capital, retorno, drawdown, win rate y profit factor.
+- Tabla de operaciones y exportación de resultados en CSV.
 
 ## Desarrollo local
 
@@ -35,11 +39,13 @@ dist/
 ├── index.html
 ├── styles.css
 ├── professional.css
-└── app.js
+├── backtest.css
+├── app.js
+└── backtest.js
 ```
 
 ## Alcance
 
-El proyecto construye y exporta estrategias. Para ejecutar un backtest real, el archivo Python exportado necesita un `data feed` de Backtrader con datos OHLCV.
+La aplicación incluye una simulación local para validar ideas rápidamente. Para investigación cuantitativa de producción, el archivo Python exportado debe ejecutarse con un `data feed` de Backtrader y contemplar slippage, calidad de datos y sesgos del mercado.
 
 
